@@ -85,6 +85,7 @@ constexpr unsigned DEFAULT_THREADS_NUMBER = 4;
 
 constexpr auto DEFAULT_MAX_TASKS = std::numeric_limits<size_t>::max();
 constexpr auto DEFAULT_MAX_TRAVEL_TIME = std::numeric_limits<Duration>::max();
+constexpr auto DEFAULT_MAX_DEPLOY_TIME = std::numeric_limits<Duration>::max();
 constexpr auto DEFAULT_MAX_DISTANCE = std::numeric_limits<Distance>::max();
 
 // Available routing engines.

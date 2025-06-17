@@ -60,6 +60,7 @@ struct Vehicle {
   CostWrapper cost_wrapper;
   size_t max_tasks;
   const Duration max_travel_time;
+  const Duration max_deploy_time;
   const Distance max_distance;
   const bool has_break_max_load;
   std::vector<VehicleStep> steps;
@@ -80,10 +81,9 @@ struct Vehicle {
     const VehicleCosts& costs = VehicleCosts(),
     double speed_factor = 1.,
     const std::optional<size_t>& max_tasks = std::optional<size_t>(),
-    const std::optional<UserDuration>& max_travel_time =
-      std::optional<UserDuration>(),
-    const std::optional<UserDistance>& max_distance =
-      std::optional<UserDistance>(),
+    const std::optional<UserDuration>& max_travel_time = std::optional<UserDuration>(),
+    const std::optional<UserDuration>& max_deploy_time = std::optional<UserDuration>(),
+    const std::optional<UserDistance>& max_distance = std::optional<UserDistance>(),
     const std::vector<VehicleStep>& input_steps = std::vector<VehicleStep>(),
     std::string type_str = NO_TYPE);
 
@@ -141,15 +141,18 @@ struct Vehicle {
     //   - decreasing max_tasks
     //   - decreasing capacity
     //   - decreasing TW length
+    //   - decreasing max deployment time
     //   - decreasing range (max travel time and distance)
     return std::tie(rhs.max_tasks,
                     rhs.capacity,
                     rhs.tw.length,
                     rhs.max_travel_time,
+                    rhs.max_deploy_time,
                     rhs.max_distance) < std::tie(lhs.max_tasks,
                                                  lhs.capacity,
                                                  lhs.tw.length,
                                                  lhs.max_travel_time,
+                                                 lhs.max_deploy_time,
                                                  lhs.max_distance);
   }
 };
