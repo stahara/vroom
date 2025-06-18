@@ -1005,6 +1005,13 @@ bool TWRoute::is_valid_addition_for_tw(const Input& input,
     }
   }
 
+  // Enforce max_deploy_time
+  if (!earliest.empty() &&
+      last_rank < route.size() &&
+      input.jobs[route[last_rank]].tws.front().end - earliest.front() > v.max_deploy_time) {
+    return false;
+  }
+
   return current.earliest + next.travel <= next.latest;
 }
 
